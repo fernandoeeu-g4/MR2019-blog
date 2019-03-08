@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux'
 
+import postsReducer from './postsReducer'
+import usersReducer from './usersReducer'
 
 
 export default combineReducers({
-  llll: () => 0
+  posts: postsReducer,
+  users: usersReducer
 })
