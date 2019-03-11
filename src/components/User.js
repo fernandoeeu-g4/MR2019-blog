@@ -1,31 +1,28 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux'
-import { fetchOneUser } from '../actions'
 
 class User extends Component {
 
-  componentDidMount() {
-    this.props.fetchOneUser(this.props.userId)
-  }
-
   render() {
-    console.log(this.props)
+    const { user } = this.props
+    if (!user) {
+      return null
+    }
     return (
-      <div>
-        <p>{this.props.users.name}</p>
+      <div className="header">
+        <p>{user.name}</p>
       </div>
     )
 
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    users: state.users
+    user: state.users.find(user => user.id === ownProps.userId)
   }
 }
 
 export default connect(
   mapStateToProps,
-  { fetchOneUser }
 )(User)
